@@ -1,0 +1,15 @@
+image:
+  file: Dockerfile
+ports:
+- port: 6080
+  onOpen: ignore
+- port: 8080
+  onOpen: open-preview
+- port: 8088
+  onOpen: ignore
+tasks:
+- init: git clone https://github.com/microsoft/vscode /workspace/vscode
+  command: cd /workspace/vscode && yarn && yarn run watch
+- openMode: split-right
+  init: npm install .
+  command: npm run simpleserver
